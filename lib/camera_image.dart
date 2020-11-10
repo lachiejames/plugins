@@ -8,8 +8,10 @@ class Plane {
     height = data['height'];
     width = data['width'];
 
-    print(
+    var out = new File('output_Plane.txt').openWrite();
+    out.write(
         'PLANE\nbytes=$bytes\n\bytesPerPixel=$bytesPerPixel\n\bytesPerRow=$bytesPerRow\n\height=$height\n\nwidth=$width');
+    out.close();
   }
 
   Uint8List bytes;
@@ -29,7 +31,10 @@ enum ImageFormatGroup {
 class ImageFormat {
   ImageFormat(this.raw) {
     group = _asImageFormatGroup(raw);
-    print('ImageFormat\raw=$raw\n\ngroup=$group');
+
+    var out = new File('output_ImageFormat.txt').openWrite();
+    out.write('ImageFormat\raw=$raw\n\ngroup=$group');
+    out.close();
   }
 
   ImageFormatGroup group;
@@ -62,7 +67,9 @@ class CameraImage {
     width = data['width'];
     planes = List<Plane>.unmodifiable(data['planes'].map((dynamic planeData) => Plane(planeData)));
 
-    print('CameraImage\nformat=$format\n\nheight=$height\n\nwidth=$width\n\nplanes=$planes');
+    var out = new File('output_CameraImage.txt').openWrite();
+    out.write('CameraImage\nformat=$format\n\nheight=$height\n\nwidth=$width\n\nplanes=$planes');
+    out.close();
   }
 
   ImageFormat format;
