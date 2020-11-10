@@ -72,23 +72,21 @@ class CameraImage {
 }
 
 void logPrint(Object object) async {
-  int defaultPrintLength = 1020;
-  if (object == null || object.toString().length <= defaultPrintLength) {
-    print(object);
-  } else {
-    String log = object.toString();
-    int start = 0;
-    int endIndex = defaultPrintLength;
-    int logLength = log.length;
-    int tmpLogLength = log.length;
-    while (endIndex < logLength) {
-      print(log.substring(start, endIndex));
-      endIndex += defaultPrintLength;
-      start += defaultPrintLength;
-      tmpLogLength -= defaultPrintLength;
-    }
-    if (tmpLogLength > 0) {
-      print(log.substring(start, logLength));
-    }
+  int charsPerLine = 120;
+  int startIndex = 0;
+  int endIndex = charsPerLine;
+  String log = object.toString();
+
+  if (log.length < charsPerLine) {
+    print(log);
+    return;
   }
+
+  while (!log.substring(startIndex, endIndex).endsWith("]")) {
+    print(log.substring(startIndex, endIndex));
+    startIndex += charsPerLine;
+    endIndex += charsPerLine;
+  }
+  print(log.substring(startIndex, endIndex));
+  print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
