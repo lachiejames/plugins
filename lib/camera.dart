@@ -464,7 +464,7 @@ class CameraController extends ValueNotifier<CameraValue> {
     _imageStreamSubscription =
         cameraEventChannel.receiveBroadcastStream().listen(
       (dynamic imageData) {
-        onAvailable(CameraImage._fromPlatformData(imageData));
+        onAvailable(CameraImage(imageData));
       },
     );
   }
