@@ -8,7 +8,7 @@ class Plane {
     height = data['height'];
     width = data['width'];
 
-    log(
+    logPrint(
         'PLANE\nbytes=$bytes\n\bytesPerPixel=$bytesPerPixel\n\bytesPerRow=$bytesPerRow\n\height=$height\n\nwidth=$width');
   }
 
@@ -29,7 +29,7 @@ enum ImageFormatGroup {
 class ImageFormat {
   ImageFormat(this.raw) {
     group = _asImageFormatGroup(raw);
-    log('ImageFormat\raw=$raw\n\ngroup=$group');
+    logPrint('ImageFormat\raw=$raw\n\ngroup=$group');
   }
 
   ImageFormatGroup group;
@@ -62,11 +62,33 @@ class CameraImage {
     width = data['width'];
     planes = List<Plane>.unmodifiable(data['planes'].map((dynamic planeData) => Plane(planeData)));
 
-    log('CameraImage\nformat=$format\n\nheight=$height\n\nwidth=$width\n\nplanes=$planes');
+    logPrint('CameraImage\nformat=$format\n\nheight=$height\n\nwidth=$width\n\nplanes=$planes');
   }
 
   ImageFormat format;
   int height;
   int width;
   List<Plane> planes;
+}
+
+void logPrint(Object object) async {
+  int defaultPrintLength = 1020;
+  if (object == null || object.toString().length <= defaultPrintLength) {
+    print(object);
+  } else {
+    String log = object.toString();
+    int start = 0;
+    int endIndex = defaultPrintLength;
+    int logLength = log.length;
+    int tmpLogLength = log.length;
+    while (endIndex < logLength) {
+      print(log.substring(start, endIndex));
+      endIndex += defaultPrintLength;
+      start += defaultPrintLength;
+      tmpLogLength -= defaultPrintLength;
+    }
+    if (tmpLogLength > 0) {
+      print(log.substring(start, logLength));
+    }
+  }
 }
