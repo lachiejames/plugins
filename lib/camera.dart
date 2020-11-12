@@ -3,9 +3,6 @@
 // found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:developer';
-import 'dart:html';
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
@@ -151,7 +148,6 @@ class CameraException implements Exception {
   CameraException(this.code, this.description);
 
   /// Error code.
-  // TODO(bparrishMines): Document possible error codes.
   // https://github.com/flutter/flutter/issues/69298
   String code;
 
@@ -435,7 +431,6 @@ class CameraController extends ValueNotifier<CameraValue> {
   ///
   /// Throws a [CameraException] if image streaming or video recording has
   /// already started.
-  // TODO(bmparr): Add settings for resolution and fps.
   Future<void> startImageStream(onLatestImageAvailable onAvailable) async {
     if (!value.isInitialized || _isDisposed) {
       throw CameraException(
