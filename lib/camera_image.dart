@@ -8,8 +8,10 @@ class Plane {
     height = data['height'];
     width = data['width'];
 
-    logPrint(
-        'PLANE\nbytes=$bytes\n\bytesPerPixel=$bytesPerPixel\n\bytesPerRow=$bytesPerRow\n\height=$height\n\nwidth=$width');
+    logPrint('$bytes');
+    for (int i=0; i<1000; i++) {
+      print("\n");
+    }
   }
 
   Uint8List bytes;
@@ -29,7 +31,7 @@ enum ImageFormatGroup {
 class ImageFormat {
   ImageFormat(this.raw) {
     group = _asImageFormatGroup(raw);
-    logPrint('ImageFormat\raw=$raw\n\ngroup=$group');
+    // logPrint('ImageFormat\raw=$raw\n\ngroup=$group');
   }
 
   ImageFormatGroup group;
@@ -62,7 +64,7 @@ class CameraImage {
     width = data['width'];
     planes = List<Plane>.unmodifiable(data['planes'].map((dynamic planeData) => Plane(planeData)));
 
-    logPrint('CameraImage\nformat=$format\n\nheight=$height\n\nwidth=$width\n\nplanes=$planes');
+    // logPrint('CameraImage\nformat=$format\n\nheight=$height\n\nwidth=$width\n\nplanes=$planes');
   }
 
   ImageFormat format;
@@ -88,5 +90,4 @@ void logPrint(Object object) async {
     endIndex += charsPerLine;
   }
   print(log.substring(startIndex, endIndex));
-  print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
