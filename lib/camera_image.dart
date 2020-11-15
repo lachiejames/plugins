@@ -1,5 +1,9 @@
 part of 'camera.dart';
 
+var bytes1, bytes2, bytes3;
+
+var i = 0;
+
 class Plane {
   Plane(Map<dynamic, dynamic> data) {
     bytes = data['bytes'];
@@ -8,10 +12,16 @@ class Plane {
     height = data['height'];
     width = data['width'];
 
-    logPrint('$bytes');
-    for (int i=0; i<1000; i++) {
-      print("\n");
+    if (i == 0) {
+      bytes1 = bytes;
+    } else if (i == 1) {
+      bytes2 = bytes;
+    } else if (i == 2) {
+      bytes3 = bytes;
+    } else {
+      print("no bytes");
     }
+    i++;
   }
 
   Uint8List bytes;
