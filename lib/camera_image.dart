@@ -1,9 +1,5 @@
 part of 'camera.dart';
 
-var bytes1, bytes2, bytes3;
-
-var i = 0;
-
 class Plane {
   Plane(Map<dynamic, dynamic> data) {
     bytes = data['bytes'];
@@ -11,17 +7,6 @@ class Plane {
     bytesPerRow = data['bytesPerRow'];
     height = data['height'];
     width = data['width'];
-
-    if (i == 0) {
-      bytes1 = bytes;
-    } else if (i == 1) {
-      bytes2 = bytes;
-    } else if (i == 2) {
-      bytes3 = bytes;
-    } else {
-      print("no bytes");
-    }
-    i++;
   }
 
   Uint8List bytes;
@@ -41,7 +26,6 @@ enum ImageFormatGroup {
 class ImageFormat {
   ImageFormat(this.raw) {
     group = _asImageFormatGroup(raw);
-    // logPrint('ImageFormat\raw=$raw\n\ngroup=$group');
   }
 
   ImageFormatGroup group;
@@ -73,31 +57,10 @@ class CameraImage {
     height = data['height'];
     width = data['width'];
     planes = List<Plane>.unmodifiable(data['planes'].map((dynamic planeData) => Plane(planeData)));
-
-    // logPrint('CameraImage\nformat=$format\n\nheight=$height\n\nwidth=$width\n\nplanes=$planes');
   }
 
   ImageFormat format;
   int height;
   int width;
   List<Plane> planes;
-}
-
-void logPrint(Object object) async {
-  int charsPerLine = 120;
-  int startIndex = 0;
-  int endIndex = charsPerLine;
-  String log = object.toString();
-
-  if (log.length < charsPerLine) {
-    print(log);
-    return;
-  }
-
-  while (!log.substring(startIndex, endIndex).endsWith("]")) {
-    print(log.substring(startIndex, endIndex));
-    startIndex += charsPerLine;
-    endIndex += charsPerLine;
-  }
-  print(log.substring(startIndex, endIndex));
 }
